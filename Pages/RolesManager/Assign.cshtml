@@ -1,0 +1,41 @@
+﻿@page
+@model DSD605SecAndAuthStudentVersion2025.Pages.RolesManager.AssignModel
+@{
+}
+@{
+    ViewData["Title"] = "Assign Role";
+}
+
+<h2>Assign Role to User</h2>
+
+<form method="post" class="mt-4">
+    <div class="form-group mb-3">
+        <label asp-for="SelectedUserName"></label>
+        <select asp-for="SelectedUserName"
+                asp-items="Model.Users"
+                class="form-select">
+            <option value="">-- Select a user --</option>
+        </select>
+        <span asp-validation-for="SelectedUserName"
+              class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-4">
+        <label asp-for="SelectedRoleName"></label>
+        <select asp-for="SelectedRoleName"
+                asp-items="Model.Roles"
+                class="form-select">
+            <option value="">-- Select a role --</option>
+        </select>
+        <span asp-validation-for="SelectedRoleName"
+              class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary me-2">Assign</button>
+    <a asp-page="./Index" class="btn btn-secondary">Cancel</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+

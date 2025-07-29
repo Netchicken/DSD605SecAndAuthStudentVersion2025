@@ -1,0 +1,25 @@
+﻿@page
+@model DSD605SecAndAuthStudentVersion2025.Pages.RolesManager.CreateModel
+@{
+}
+<div class="container mt-4" style="max-width: 500px;">
+    <h2>Create New Role</h2>
+
+    <form method="post" novalidate>
+        <div asp-validation-summary="All" class="text-danger mb-3"></div>
+
+        <div class="mb-3">
+            <label asp-for="Name" class="form-label"></label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Create Role</button>
+        <a asp-page="Index" class="btn btn-outline-secondary ms-2">Cancel</a>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
