@@ -1,0 +1,162 @@
+﻿@page
+@model DSD605SecAndAuthStudentVersion2025.Pages.ClaimsManager.AssignModel
+@{
+    ViewData["Title"] = "Assign Claim To User";
+}
+
+<!-- Page Header with navigation breadcrumb -->
+<div class="container mt-4">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a asp-page="./Index">Claims Management</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">Assign Claim</li>
+        </ol>
+    </nav>
+
+    <!-- Display status message if present -->
+    @if (!string.IsNullOrEmpty(Model.StatusMessage))
+    {
+       
+            var alertClass = Model.StatusMessage.StartsWith("Success") ? "alert-success" :
+                           Model.StatusMessage.StartsWith("Warning") ? "alert-warning" : "alert-danger";
+            var iconClass = Model.StatusMessage.StartsWith("Success") ? "bi-check-circle" :
+                          Model.StatusMessage.StartsWith("Warning") ? "bi-exclamation-triangle" : "bi-x-circle";
+       
+
+        <div class="alert @alertClass alert-dismissible fade show" role="alert">
+            <i class="bi @iconClass"></i> @Model.StatusMessage
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+    <!-- Main content section -->
+    <h4>
+        <i class="bi bi-person-plus"></i> Assign Claim To User
+    </h4>
+
+    <div class="row">
+        <div class="col-md-8">
+            <!-- Main assignment form -->
+            <form method="post">
+                <!-- Display validation summary -->
+                <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+
+                <!-- User selection dropdown -->
+                <div class="form-group mb-3">
+                    <label asp-for="SelectedUserId" class="control-label">
+                        <i class="bi bi-person"></i> @Html.DisplayNameFor(m => m.SelectedUserId)
+                    </label>
+                    <select asp-for="SelectedUserId" asp-items="Model.Users" class="form-control">
+                        <option value="">-- Select a user --</option>
+                    </select>
+                    <span asp-validation-for="SelectedUserId" class="text-danger"></span>
+                    <div class="form-text">
+                        Choose the user who will receive this claim
+                    </div>
+                </div>
+
+                <!-- Claim type input -->
+                <div class="form-group mb-3">
+                    <label asp-for="ClaimType" class="control-label">
+                        <i class="bi bi-tag"></i> @Html.DisplayNameFor(m => m.ClaimType)
+                    </label>
+                    <input asp-for="ClaimType" class="form-control" placeholder="e.g., Department, Permission, Role" />
+                    <span asp-validation-for="ClaimType" class="text-danger"></span>
+                    <div class="form-text">
+                        The category or type of this claim
+                    </div>
+                </div>
+
+                <!-- Claim value input -->
+                <div class="form-group mb-3">
+                    <label asp-for="ClaimValue" class="control-label">
+                        <i class="bi bi-input-cursor-text"></i> @Html.DisplayNameFor(m => m.ClaimValue)
+                    </label>
+                    <input asp-for="ClaimValue" class="form-control" placeholder="e.g., HR, CanEdit, Manager" />
+                    <span asp-validation-for="ClaimValue" class="text-danger"></span>
+                    <div class="form-text">
+                        The specific value for this claim (optional)
+                    </div>
+                </div>
+
+                <!-- Submit and cancel buttons -->
+                <div class="form-group">
+                    <input type="submit" value="Assign" class="btn btn-primary">
+                    <i class="bi bi-check-circle"></i> Assign Claim
+                    />
+                    <a asp-page="./Index" class="btn btn-outline-secondary ms-2">
+                        <i class="bi bi-x-circle"></i> Cancel
+                    </a>
+                </div>
+            </form>
+        </div>
+
+        <!-- Information sidebar -->
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h6 class="mb-0">
+                        <i class="bi bi-info-circle"></i> Claim Examples
+                    </h6>
+                </div>
+                <div class="card-body">
+                    <h6>Common Claim Types:</h6>
+                    <ul class="list-unstyled">
+                        <li><strong>Department:</strong> HR, IT, Sales</li>
+                        <li><strong>Permission:</strong> CanEdit, CanDelete</li>
+                        <li><strong>Level:</strong> Manager, Admin</li>
+                        <li><strong>Certification:</strong> FirstAid, Safety</li>
+                    </ul>
+
+                    <hr>
+
+                    <h6>Tips:</h6>
+                    <ul class="small">
+                        <li>Claims are case-sensitive</li>
+                        <li>Use consistent naming conventions</li>
+                        <li>Claim values are optional for boolean-type claims</li>
+                        <li>Consider using standard claim types when possible</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Include client-side validation scripts -->
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+    <!-- Custom JavaScript for enhanced user experience -->
+    <script>document.addEventListener('DOMContentLoaded', function() {
+            // Auto-focus the user selection dropdown
+            const userSelect = document.getElementById('SelectedUserId');
+            if (userSelect) {
+                userSelect.focus();
+            }
+
+            // Auto-dismiss success alerts after 5 seconds
+            const successAlert = document.querySelector('.alert-success');
+            if (successAlert) {
+                setTimeout(function() {
+                    const bsAlert = new bootstrap.Alert(successAlert);
+                    bsAlert.close();
+                }, 5000);
+            }
+
+            // Add input validation feedback
+            const form = document.querySelector('form');
+            if (form) {
+                form.addEventListener('submit', function(e) {
+                    const claimType = document.getElementById('ClaimType');
+                    if (claimType && claimType.value.trim() === '') {
+                        e.preventDefault();
+                        claimType.focus();
+                        claimType.classList.add('is-invalid');
+                    }
+                });
+            }
+        });</script>
+}
