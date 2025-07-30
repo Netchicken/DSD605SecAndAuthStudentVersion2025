@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace RolesForAssessment.Models
+namespace DSD605SecAndAuthStudentVersion2025.Models
 {
     public class ApplicationUser : IdentityUser
     {

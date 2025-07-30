@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using DSD605SecAndAuthStudentVersion2025.Data;
 using DSD605SecAndAuthStudentVersion2025.Models;
 
-namespace DSD605SecAndAuthStudentVersion2025.Pages.Movies
+namespace DSD605SecAndAuthStudentVersion2025.Pages.Casts
 {
     public class EditModel : PageModel
     {
@@ -21,7 +21,7 @@ namespace DSD605SecAndAuthStudentVersion2025.Pages.Movies
         }
 
         [BindProperty]
-        public Movie Movie { get; set; } = default!;
+        public Cast Cast { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(Guid? id)
         {
@@ -30,12 +30,13 @@ namespace DSD605SecAndAuthStudentVersion2025.Pages.Movies
                 return NotFound();
             }
 
-            var movie =  await _context.Movie.FirstOrDefaultAsync(m => m.Id == id);
-            if (movie == null)
+            var cast =  await _context.Cast.FirstOrDefaultAsync(m => m.Id == id);
+            if (cast == null)
             {
                 return NotFound();
             }
-            Movie = movie;
+            Cast = cast;
+           ViewData["MovieId"] = new SelectList(_context.Movie, "Id", "Id");
             return Page();
         }
 
@@ -48,7 +49,7 @@ namespace DSD605SecAndAuthStudentVersion2025.Pages.Movies
                 return Page();
             }
 
-            _context.Attach(Movie).State = EntityState.Modified;
+            _context.Attach(Cast).State = EntityState.Modified;
 
             try
             {
@@ -56,7 +57,7 @@ namespace DSD605SecAndAuthStudentVersion2025.Pages.Movies
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!MovieExists(Movie.Id))
+                if (!CastExists(Cast.Id))
                 {
                     return NotFound();
                 }
@@ -69,9 +70,9 @@ namespace DSD605SecAndAuthStudentVersion2025.Pages.Movies
             return RedirectToPage("./Index");
         }
 
-        private bool MovieExists(Guid id)
+        private bool CastExists(Guid id)
         {
-            return _context.Movie.Any(e => e.Id == id);
+            return _context.Cast.Any(e => e.Id == id);
         }
     }
 }

@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using DSD605SecAndAuthStudentVersion2025.Data;
 using DSD605SecAndAuthStudentVersion2025.Models;
 
-namespace DSD605SecAndAuthStudentVersion2025.Pages.Movies
+namespace DSD605SecAndAuthStudentVersion2025.Pages.Casts
 {
     public class DeleteModel : PageModel
     {
@@ -20,7 +20,7 @@ namespace DSD605SecAndAuthStudentVersion2025.Pages.Movies
         }
 
         [BindProperty]
-        public Movie Movie { get; set; } = default!;
+        public Cast Cast { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(Guid? id)
         {
@@ -29,11 +29,11 @@ namespace DSD605SecAndAuthStudentVersion2025.Pages.Movies
                 return NotFound();
             }
 
-            var movie = await _context.Movie.FirstOrDefaultAsync(m => m.Id == id);
+            var cast = await _context.Cast.FirstOrDefaultAsync(m => m.Id == id);
 
-            if (movie is not null)
+            if (cast is not null)
             {
-                Movie = movie;
+                Cast = cast;
 
                 return Page();
             }
@@ -48,11 +48,11 @@ namespace DSD605SecAndAuthStudentVersion2025.Pages.Movies
                 return NotFound();
             }
 
-            var movie = await _context.Movie.FindAsync(id);
-            if (movie != null)
+            var cast = await _context.Cast.FindAsync(id);
+            if (cast != null)
             {
-                Movie = movie;
-                _context.Movie.Remove(Movie);
+                Cast = cast;
+                _context.Cast.Remove(Cast);
                 await _context.SaveChangesAsync();
             }
 

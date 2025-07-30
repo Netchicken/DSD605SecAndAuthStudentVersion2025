@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using DSD605SecAndAuthStudentVersion2025.Data;
 using DSD605SecAndAuthStudentVersion2025.Models;
 
-namespace DSD605SecAndAuthStudentVersion2025.Pages.Movies
+namespace DSD605SecAndAuthStudentVersion2025.Pages.Casts
 {
     public class CreateModel : PageModel
     {
@@ -21,11 +21,12 @@ namespace DSD605SecAndAuthStudentVersion2025.Pages.Movies
 
         public IActionResult OnGet()
         {
+        ViewData["MovieId"] = new SelectList(_context.Movie, "Id", "Id");
             return Page();
         }
 
         [BindProperty]
-        public Movie Movie { get; set; } = default!;
+        public Cast Cast { get; set; } = default!;
 
         // For more information, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
@@ -35,7 +36,7 @@ namespace DSD605SecAndAuthStudentVersion2025.Pages.Movies
                 return Page();
             }
 
-            _context.Movie.Add(Movie);
+            _context.Cast.Add(Cast);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");

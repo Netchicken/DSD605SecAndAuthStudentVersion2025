@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using DSD605SecAndAuthStudentVersion2025.Data;
 using DSD605SecAndAuthStudentVersion2025.Models;
 
-namespace DSD605SecAndAuthStudentVersion2025.Pages.Movies
+namespace DSD605SecAndAuthStudentVersion2025.Pages.Casts
 {
     public class DetailsModel : PageModel
     {
@@ -19,7 +19,7 @@ namespace DSD605SecAndAuthStudentVersion2025.Pages.Movies
             _context = context;
         }
 
-        public Movie Movie { get; set; } = default!;
+        public Cast Cast { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(Guid? id)
         {
@@ -28,11 +28,11 @@ namespace DSD605SecAndAuthStudentVersion2025.Pages.Movies
                 return NotFound();
             }
 
-            var movie = await _context.Movie.FirstOrDefaultAsync(m => m.Id == id);
+            var cast = await _context.Cast.FirstOrDefaultAsync(m => m.Id == id);
 
-            if (movie is not null)
+            if (cast is not null)
             {
-                Movie = movie;
+                Cast = cast;
 
                 return Page();
             }

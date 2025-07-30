@@ -4,7 +4,7 @@
 
     using System;
 
-    public class ApplicationRole : IdentityRole<Guid>
+    public class DSD605SecAndAuthStudentVersion2025 : IdentityRole<Guid>
     {
         public string Description { get; set; }
     }
