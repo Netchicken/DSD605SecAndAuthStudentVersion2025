@@ -7,4 +7,38 @@
 <header>
     <h1 class="text-danger">@ViewData["Title"]</h1>
     <p class="text-danger">You do not have access to this resource.</p>
+    <p class="text-danger">Go away, you are not allowed here.</p>
+
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6 text-center">
+                <div class="card border-danger shadow">
+                    <div class="card-body p-5">
+                        <!-- Large sad/error icon -->
+                        <i class="bi bi-emoji-frown display-1 text-danger mb-4"></i>
+
+                        <h1 class="text-danger mb-3">@ViewData["Title"]</h1>
+                        <p class="text-muted mb-4">You do not have access to this resource.</p>
+
+                        <div class="alert alert-danger" role="alert">
+                            <i class="bi bi-shield-x me-2"></i>
+                            Access to this area is restricted. Please contact your administrator if you believe this is an error.
+                        </div>
+
+
+                        <img src="~/images/Denied.png" alt="Access Denied" class="img-fluid" style="width: 40%; max-width: 300px; min-width: 150px; height: auto;" />
+
+                        <div class="mt-4">
+                            <a asp-page="/Index" class="btn btn-primary me-2">
+                                <i class="bi bi-house me-1"></i> Return Home
+                            </a>
+                            <a href="javascript:history.back()" class="btn btn-outline-secondary">
+                                <i class="bi bi-arrow-left me-1"></i> Go Back
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </header>

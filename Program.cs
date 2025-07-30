@@ -37,10 +37,19 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.User.RequireUniqueEmail = false;
 });
 
+builder.Services.AddAuthorization(options =>
+{
+    // Add custom policies here if needed
+    options.AddPolicy("RequireAdministratorRole", policyBuilder => policyBuilder.RequireRole("Admin"));
+
+});
 
 
+builder.Services.AddRazorPages(options =>
+{
+    options.Conventions.AuthorizeFolder("/RolesManager", "RequireAdministratorRole");
+});
 
-builder.Services.AddRazorPages();
 
 var app = builder.Build();
 

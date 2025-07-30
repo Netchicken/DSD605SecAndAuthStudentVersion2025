@@ -1,4 +1,4 @@
-
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -12,6 +12,7 @@ namespace DSD605SecAndAuthStudentVersion2025.Pages.RolesManager
     /// <summary>
     /// Page model for assigning roles to users
     /// </summary>
+    [Authorize(Roles = "Admin")]
     public class AssignModel : PageModel
     {
         // Dependency injection for user and role management

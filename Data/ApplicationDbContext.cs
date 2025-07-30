@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using RolesForAssessment.Models;
 
 namespace DSD605SecAndAuthStudentVersion2025.Data
 {
@@ -9,5 +10,6 @@ namespace DSD605SecAndAuthStudentVersion2025.Data
             : base(options)
         {
         }
+        public DbSet<RolesForAssessment.Models.Movie> Movie { get; set; } = default!;
     }
 }
