@@ -3,7 +3,13 @@ using DSD605SecAndAuthStudentVersion2025.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
+
+
 var builder = WebApplication.CreateBuilder(args);
+
+
+//api interface
+builder.Services.AddOpenApi();
 
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
@@ -54,6 +60,22 @@ builder.Services.AddRazorPages(options =>
 
 var app = builder.Build();
 
+
+
+
+// Configure API and Swagger to only run in development
+if (app.Environment.IsDevelopment())
+{
+    app.MapOpenApi();
+    // Add Swagger UI using Swashbuckle (standard for ASP.NET Core)
+
+    app.UseSwaggerUi(options =>
+    {
+        options.DocumentPath = "/openapi/v1.json";
+        // options.RoutePrefix = "swagger";
+    });
+}
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -67,7 +89,7 @@ else
 }
 
 app.UseHttpsRedirection();
-
+app.MapControllers();
 app.UseRouting();
 
 app.UseAuthentication();
