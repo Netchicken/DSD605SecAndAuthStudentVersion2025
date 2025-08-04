@@ -4,9 +4,22 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 
-
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 var builder = WebApplication.CreateBuilder(args);
 
+
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: MyAllowSpecificOrigins,
+                      policy =>
+                      {
+                          policy.WithOrigins("http://localhost:3000", "http://localhost:3001")  // Just the origin, not the full API path
+                                  .AllowAnyMethod()                        // Allow GET, POST, PUT, DELETE, etc.
+                                  .AllowAnyHeader();                       // Allow any headers in requests
+
+                      });
+});
 
 //api interface
 builder.Services.AddOpenApi();
@@ -57,6 +70,8 @@ builder.Services.AddRazorPages(options =>
     options.Conventions.AuthorizeFolder("/RolesManager", "RequireAdministratorRole");
 });
 
+builder.Logging.AddConsole();
+builder.Logging.SetMinimumLevel(LogLevel.Debug);
 
 var app = builder.Build();
 
@@ -89,12 +104,13 @@ else
 }
 
 app.UseHttpsRedirection();
-app.MapControllers();
-app.UseRouting();
 
+app.UseRouting();
+// CORS must be placed after UseRouting and before UseAuthentication
+app.UseCors(MyAllowSpecificOrigins);
 app.UseAuthentication();
 app.UseAuthorization();
-
+app.MapControllers();
 app.MapStaticAssets();
 app.MapRazorPages()
    .WithStaticAssets();
