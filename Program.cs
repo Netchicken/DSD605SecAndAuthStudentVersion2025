@@ -116,3 +116,5 @@ app.MapRazorPages()
    .WithStaticAssets();
 
 app.Run();
+
+public partial class Program { }
