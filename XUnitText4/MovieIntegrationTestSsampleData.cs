@@ -3,13 +3,13 @@ using DSD605SecAndAuthStudentVersion2025.Models;
 
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 
 using System.Net;
-using System.Net.Http.Json;
+
+using Xunit;
 
 
-namespace XUnitTest4
+namespace DSD605SecAndAuthStudentVersion2025.XUnitText4
 {
     public class MovieIntegrationTestSampleData : IClassFixture<WebApplicationFactory<Program>>
     {

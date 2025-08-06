@@ -1,12 +1,10 @@
 ﻿using DSD605SecAndAuthStudentVersion2025.Data;
 
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 
 
-namespace XUnitTest4
+namespace DSD605SecAndAuthStudentVersion2025.XUnitText4
 {
     //Inherits from WebApplicationFactory<Program>: This is Microsoft's built-in class for creating test versions of web apps
     //•	Purpose: Creates a controlled testing environment for your Razor Pages application
