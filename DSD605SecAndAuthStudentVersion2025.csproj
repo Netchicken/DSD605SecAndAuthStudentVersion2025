@@ -8,9 +8,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="XUnitTests2\**" />
     <Compile Remove="XUnitTests\**" />
+    <Content Remove="XUnitTests2\**" />
     <Content Remove="XUnitTests\**" />
+    <EmbeddedResource Remove="XUnitTests2\**" />
     <EmbeddedResource Remove="XUnitTests\**" />
+    <None Remove="XUnitTests2\**" />
     <None Remove="XUnitTests\**" />
   </ItemGroup>
 
