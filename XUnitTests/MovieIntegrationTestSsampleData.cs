@@ -9,7 +9,7 @@ using System.Net;
 using System.Net.Http.Json;
 
 
-namespace XUnit_Tests
+namespace XUnitTests2
 {
     public class MovieIntegrationTestSampleData : IClassFixture<WebApplicationFactory<Program>>
     {

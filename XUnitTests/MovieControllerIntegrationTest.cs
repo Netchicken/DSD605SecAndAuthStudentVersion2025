@@ -1,4 +1,4 @@
-﻿namespace XUnit_Tests
+﻿namespace XUnitTests2
 {
     public class MovieControllerIntegrationTests : IClassFixture<TestingWebAppFactory<Program>>
     {
