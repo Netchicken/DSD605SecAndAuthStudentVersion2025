@@ -7,6 +7,13 @@
     <UserSecretsId>aspnet-DSD605SecAndAuthStudentVersion2025-7e50a824-9779-4026-9653-a870661c8e0f</UserSecretsId>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="XUnitTests\**" />
+    <Content Remove="XUnitTests\**" />
+    <EmbeddedResource Remove="XUnitTests\**" />
+    <None Remove="XUnitTests\**" />
+  </ItemGroup>
+
  
 
   <ItemGroup>
