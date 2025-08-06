@@ -9,7 +9,7 @@ using System.Net;
 using System.Net.Http.Json;
 
 
-namespace XUnitTests2
+namespace DSD605SecAndAuthStudentVersion2025.XUnitTests2
 {
     public class MovieIntegrationTestSampleData : IClassFixture<WebApplicationFactory<Program>>
     {
